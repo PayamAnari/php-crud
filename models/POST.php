@@ -46,6 +46,16 @@ class Post
       posts.created_at DESC
       ';
 
+        //Prepare Statement.
+
+        $post = $this->connection->prepare($query);
+
+        //Execute Query.
+
+        $post->execute();
+
+        return $post;
+
     }
 
 }
