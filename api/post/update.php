@@ -21,3 +21,12 @@ $post = new Post($db);
 // Get raw posted data.
 // For $data to work -> add headers and in postman add content type.
 $data = json_decode(file_get_contents("php://input"));
+
+if (isset($data)) {
+    $params = [
+        'id' => $data->id,
+        'title' => $data->title,
+        'category_id' => $data->category_id,
+        'description' => $data->description,
+    ];
+}

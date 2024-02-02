@@ -128,4 +128,47 @@ class Post
 
     }
 
+    //Method for updating post.
+
+    public function update_post($params)
+    {
+
+        try
+        {
+            // Assigning the values.
+
+            $this->id = $params['id'];
+            $this->title = $params['title'];
+            $this->description = $params['description'];
+            $this->category_id = $params['category_id'];
+
+            // Create Query.
+
+            $query = 'UPDATE ' . $this->table . '
+            SET
+            title = :title,
+            description = :description,
+            category_id = :category_id
+            WHERE
+            id = :id';
+
+            $post = $this->connection->prepare($query);
+
+            $post->bindValue('id', $this->id);
+            $post->bindValue('title', $this->title);
+            $post->bindValue('description', $this->description);
+            $post->bindValue('category_id', $this->category_id);
+
+            if ($post->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
 }
