@@ -58,4 +58,26 @@ class Post
 
     }
 
+    // Method for reading single post
+
+    public function read_single_post($id)
+    {
+        $this->id = $id;
+
+        //Create Query.
+
+        $query = 'SELECT
+         category.name as category,
+         posts.id,
+         posts.title,
+         posts.description,
+         posts.category_id,
+         posts.created_at
+         FROM ' . $this->$table . ' posts LEFT JOIN
+         category ON posts.category_id = category.id
+         WHERE posts.id = ?
+         LIMIT 0,1
+         ';
+    }
+
 }
