@@ -92,10 +92,32 @@ class Post
     public function create_new_post($params)
     {
 
-        //Create Query.
-
         try
         {
+            // Assigning the values.
+
+            $this->title = $params['title'];
+            $this->description = $params['description'];
+            $this->category_id = $params['category_id'];
+
+            // Create Query.
+
+            $query = 'INSERT INTO ' . $this->table . '
+            SET title = :title,
+            description = :details,
+            category_id = :category_id';
+
+            $post = $this->connection->prepare($query);
+
+            $post->bindValue('title', $this->title);
+            $post->bindValue('details', $this->description);
+            $post->bindValue('category_id', $this->category_id);
+
+            if ($post->execute()) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (PDOException $e) {
             echo $e->getMessage();
