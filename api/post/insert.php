@@ -23,6 +23,9 @@ $post = new Post($db);
 //$data = json_decode(file_get_contents("php://input"));
 
 if (count($_POST)) {
+
+    // Create post.
+
     $params = [
         'title' => $_POST['title'],
         'description' => $_POST['description'],
