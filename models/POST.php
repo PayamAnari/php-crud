@@ -171,4 +171,35 @@ class Post
 
     }
 
+    //Method for deleting post.
+
+    public function delete_post($id)
+    {
+
+        try
+        {
+            // Assigning the values.
+
+            $this->id = $id;
+
+            // Create Query.
+
+            $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+
+            $post = $this->connection->prepare($query);
+
+            $post->bindValue('id', $this->id);
+
+            if ($post->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
 }
