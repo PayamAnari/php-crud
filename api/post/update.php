@@ -23,10 +23,19 @@ $post = new Post($db);
 $data = json_decode(file_get_contents("php://input"));
 
 if (isset($data)) {
+
+    //Update Post.
+
     $params = [
         'id' => $data->id,
         'title' => $data->title,
         'category_id' => $data->category_id,
         'description' => $data->description,
     ];
+
+    if ($post->update_post($params)) {
+        echo json_encode(['message' => 'Post Updated']);
+    } else {
+        echo json_encode(['message' => 'Post Not Updated']);
+    }
 }
