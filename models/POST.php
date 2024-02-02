@@ -87,4 +87,20 @@ class Post
         return $post;
     }
 
+    //Method for creating post.
+
+    public function create_new_post($params)
+    {
+
+        //Create Query.
+
+        try
+        {
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
 }
