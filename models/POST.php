@@ -78,6 +78,12 @@ class Post
          WHERE posts.id = ?
          LIMIT 0,1
          ';
+
+        $post = $this->connection->prepare($query);
+
+        $post->bindParam(3, $this->id);
+
+        return $post;
     }
 
 }
