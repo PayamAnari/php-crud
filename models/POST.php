@@ -75,14 +75,15 @@ class Post
          posts.created_at
          FROM ' . $this->$table . ' posts LEFT JOIN
          category ON posts.category_id = category.id
-         WHERE posts.id = ?
+         WHERE posts.id =?
          LIMIT 0,1
          ';
 
         $post = $this->connection->prepare($query);
 
-        $post->bindParam(3, $this->id);
+        $post->bindValue(1, $this->id, PDO::PARAM_INT);
 
+        $post->execute();
         return $post;
     }
 

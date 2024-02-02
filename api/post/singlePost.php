@@ -22,3 +22,24 @@ $db = $database->connect();
 //Instantiate Post.
 
 $post = new Post($db);
+
+//Get Post.
+
+if (isset($_GET['id'])) {
+
+    $data = $post->read_single_post($_GET['id']);
+
+    if ($data->rowCount()) {
+        $posts = [];
+
+        while ($row = $data->fetch(PDO::FETCH_OBJ)) {
+            $posts[$row->id] = [
+                'id' => $row->id,
+                'categoryName' => $row->category,
+                'description' => $row->description,
+                'title' => $row->title,
+                'created_at' => $row->created_at,
+            ];
+        }
+    }
+}
