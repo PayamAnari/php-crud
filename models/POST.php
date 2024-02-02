@@ -184,7 +184,8 @@ class Post
 
             // Create Query.
 
-            $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+            $query = 'DELETE FROM ' . $this->table .
+                ' WHERE id = :id';
 
             $post = $this->connection->prepare($query);
 

@@ -24,7 +24,7 @@ if (isset($data)) {
 
     //Delete Post.
 
-    if ($post->update_post($id)) {
+    if ($post->delete_post($data->id)) {
         echo json_encode(['message' => 'Post Deleted']);
     } else {
         echo json_encode(['message' => 'Post Not Deleted']);
