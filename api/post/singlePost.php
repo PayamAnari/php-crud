@@ -41,5 +41,9 @@ if (isset($_GET['id'])) {
                 'created_at' => $row->created_at,
             ];
         }
+
+        echo json_encode($posts);
     }
+} else {
+    echo json_encode(['message' => 'No post found']);
 }

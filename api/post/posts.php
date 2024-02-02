@@ -27,7 +27,7 @@ $data = $post->readPosts();
 //if there is posts available
 
 if ($data->rowCount()) {
-    $posts -= [];
+    $posts = [];
 
     //fetching the data from the database
 
@@ -35,19 +35,18 @@ if ($data->rowCount()) {
 
         $posts[$row->id] = [
             'id' => $row->id,
+            'title' => $row->title,
             'categoryName' => $row->category,
             'description' => $row->description,
-            'title' => $row->title,
             'created_at' => $row->created_at,
         ];
     }
 
     //return the data in json format
-
+    http_response_code(200);
     echo json_encode($posts);
 
 } else {
-    echo json_encode(
-        ['message' => 'No Posts Found']
-    );
+    http_response_code(404);
+    echo json_encode(['message' => 'No Posts Found']);
 }
