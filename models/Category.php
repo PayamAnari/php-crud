@@ -135,4 +135,42 @@ class Category
         }
     }
 
+    //Delete Category.
+
+    public function deleteCategory($id)
+    {
+
+        try
+        {
+
+            // Assigning the values.
+
+            $this->id = $id
+
+            //Create Query.
+
+            $query = 'DELETE FROM ' . $this->table . 
+            ' WHERE id = :id';
+
+            //Prepare Statement.
+
+            $category = $this->connection->prepare($query);
+
+            //Bind Data.
+
+            $category->bindValue('id', $this->id);
+
+            //Execute Query.
+
+            if ($category->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
