@@ -2,6 +2,9 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+/**
+ * @OA\Info(title="PDO PHP Rest Api", version="1.0")
+ */
 
 class Post
 {
@@ -29,6 +32,15 @@ class Post
 
     //Get Posts.
 
+    /**
+     * @OA\Get(
+     * path="/api/post/posts.php",
+     * summary="Get all list of posts",
+     * tags={"Posts"},
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function readPosts()
     {
 

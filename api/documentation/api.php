@@ -1,8 +1,8 @@
 <?php
 
-require "vendor/autoload.php";
+require "../../vendor/autoload.php";
 
-$openapi = \OpenApi\Generator::scan(['/path/to/project']);
+$openapi = \OpenApi\Generator::scan([$_SERVER['DOCUMENT_ROOT'] . '/models']);
 
-header('Content-Type: application/x-json');
+header('Content-Type: application/json');
 echo $openapi->toJSON();
