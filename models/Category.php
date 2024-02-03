@@ -139,29 +139,30 @@ class Category
 
     public function deleteCategory($id)
     {
-
-        try
-        {
-
+        try {
             // Assigning the values.
+            $this->id = $id;
 
-            $this->id = $id
+            // Check if there are associated posts
+            $postsQuery = 'SELECT id FROM posts WHERE category_id = :id';
+            $postsStatement = $this->connection->prepare($postsQuery);
+            $postsStatement->bindValue('id', $id);
+            $postsStatement->execute();
 
-            //Create Query.
+            if ($postsStatement->rowCount() > 0) {
+                return false;
+            }
 
-            $query = 'DELETE FROM ' . $this->table . 
-            ' WHERE id = :id';
+            // Create Query.
+            $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
 
-            //Prepare Statement.
-
+            // Prepare Statement.
             $category = $this->connection->prepare($query);
 
-            //Bind Data.
-
+            // Bind Data.
             $category->bindValue('id', $this->id);
 
-            //Execute Query.
-
+            // Execute Query.
             if ($category->execute()) {
                 return true;
             } else {
