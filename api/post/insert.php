@@ -28,6 +28,7 @@ if (count($_POST)) {
 
     $params = [
         'title' => $_POST['title'],
+        'author' => $_POST['author'],
         'description' => $_POST['description'],
         'category_id' => $_POST['category_id'],
     ];
@@ -38,6 +39,7 @@ if (count($_POST)) {
 } else if (isset($data)) {
     $params = [
         'title' => $data->title,
+        'author' => $data->author,
         'description' => $data->description,
         'category_id' => $data->category_id,
     ];

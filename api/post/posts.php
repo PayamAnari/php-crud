@@ -36,6 +36,7 @@ if ($data->rowCount()) {
         $posts[$row->id] = [
             'id' => $row->id,
             'title' => $row->title,
+            'author' => $row->author,
             'categoryName' => $row->category,
             'description' => $row->description,
             'created_at' => $row->created_at,

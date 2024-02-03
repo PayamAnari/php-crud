@@ -38,6 +38,7 @@ if (isset($_GET['id'])) {
                 'categoryName' => $row->category,
                 'description' => $row->description,
                 'title' => $row->title,
+                'author' => $row->author,
                 'created_at' => $row->created_at,
             ];
         }

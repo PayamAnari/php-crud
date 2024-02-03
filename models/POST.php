@@ -11,6 +11,7 @@ class Post
     public $id;
     public $category_id;
     public $title;
+    public $author;
     public $description;
     public $created_at;
 
@@ -37,6 +38,7 @@ class Post
       category.name as category,
       posts.id,
       posts.title,
+      posts.author,
       posts.description,
       posts.category_id,
       posts.created_at
@@ -70,6 +72,7 @@ class Post
          category.name as category,
          posts.id,
          posts.title,
+         posts.author,
          posts.description,
          posts.category_id,
          posts.created_at
@@ -99,6 +102,7 @@ class Post
             // Assigning the values.
 
             $this->title = $params['title'];
+            $this->author = $params['author'];
             $this->description = $params['description'];
             $this->category_id = $params['category_id'];
 
@@ -107,12 +111,14 @@ class Post
             $query = 'INSERT INTO ' . $this->table . '
             SET
             title = :title,
+            author = :author,
             description = :description,
             category_id = :category_id';
 
             $post = $this->connection->prepare($query);
 
             $post->bindValue('title', $this->title);
+            $post->bindValue('author', $this->author);
             $post->bindValue('description', $this->description);
             $post->bindValue('category_id', $this->category_id);
 
@@ -139,6 +145,7 @@ class Post
 
             $this->id = $params['id'];
             $this->title = $params['title'];
+            $this->author = $params['author'];
             $this->description = $params['description'];
             $this->category_id = $params['category_id'];
 
@@ -147,6 +154,7 @@ class Post
             $query = 'UPDATE ' . $this->table . '
             SET
             title = :title,
+            author = :author,
             description = :description,
             category_id = :category_id
             WHERE
@@ -156,6 +164,7 @@ class Post
 
             $post->bindValue('id', $this->id);
             $post->bindValue('title', $this->title);
+            $post->bindValue('author', $this->author);
             $post->bindValue('description', $this->description);
             $post->bindValue('category_id', $this->category_id);
 

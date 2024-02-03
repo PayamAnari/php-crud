@@ -29,6 +29,7 @@ if (isset($data)) {
     $params = [
         'id' => $data->id,
         'title' => $data->title,
+        'author' => $data->author,
         'category_id' => $data->category_id,
         'description' => $data->description,
     ];
