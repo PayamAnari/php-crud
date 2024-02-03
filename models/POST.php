@@ -123,7 +123,39 @@ class Post
     }
 
     //Method for creating post.
-
+    /**
+     * @OA\Post(
+     * path="/api/post/insert.php",
+     * summary="Create new post",
+     * tags={"Posts"},
+     * @OA\RequestBody(
+     * @OA\MediaType(
+     * mediaType="multipart/form-data",
+     * @OA\Schema(
+     * @OA\Property(
+     * property="title",
+     * type="string"
+     * ),
+     * @OA\Property(
+     * property="author",
+     * type="string"
+     * ),
+     * @OA\Property(
+     * property="description",
+     * type="string"
+     * ),
+     * @OA\Property(
+     * property="category_id",
+     * type="integer"
+     * ),
+     * ),
+     * ),
+     * ),
+     * ),
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function create_new_post($params)
     {
 
