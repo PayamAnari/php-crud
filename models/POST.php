@@ -74,6 +74,24 @@ class Post
 
     // Method for reading single post
 
+    /**
+     * @OA\Get(
+     * path="/api/post/singlePost.php",
+     * summary="Get single post",
+     * tags={"Posts"},
+     * @OA\Parameter(
+     * name="id",
+     * in="query",
+     * required=true,
+     * description="ID of the post",
+     * @OA\Schema(
+     * type="string"
+     * ),
+     * ),
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function read_single_post($id)
     {
         $this->id = $id;
