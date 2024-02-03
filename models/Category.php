@@ -55,39 +55,41 @@ class Category
 
     //Create Category.
 
-    public function createCategory()
+    public function createCategory($params)
     {
 
-        //Create Query.
+        try
+        {
 
-        $query = 'INSERT INTO ' . $this->table . '
-        SET
-        name = :name';
+            // Assigning the values.
 
-        //Prepare Statement.
+            $this->name = $params['name'];
 
-        $category = $this->connection->prepare($query);
+            //Create Query.
 
-        //Clean Data.
+            $query = 'INSERT INTO ' . $this->table . '
+               SET
+               name = :name';
 
-        $this->name = htmlspecialchars(strip_tags($this->name));
+            //Prepare Statement.
 
-        //Bind Data.
+            $category = $this->connection->prepare($query);
 
-        $category->bindParam(':name', $this->name);
+            //Bind Data.
 
-        //Execute Query.
+            $category->bindValue('name', $this->name);
 
-        if ($category->execute()) {
-            return true;
+            //Execute Query.
+
+            if ($category->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
-
-        //Print Error if something goes wrong.
-
-        printf("Error: %s.\n", $category->error);
-
-        return false;
-
     }
 
 }
