@@ -212,4 +212,24 @@ class Post
 
     }
 
+    public function deletePostsByCategoryId($categoryId)
+    {
+        try {
+            // Create Query.
+            $query = 'DELETE FROM ' . $this->table . ' WHERE category_id = :category_id';
+
+            // Prepare Statement.
+            $statement = $this->connection->prepare($query);
+
+            // Bind Data.
+            $statement->bindValue('category_id', $categoryId);
+
+            // Execute Query.
+            return $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
 }

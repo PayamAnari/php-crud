@@ -4,6 +4,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+include_once 'Post.php';
+
 class Category
 {
 
@@ -143,16 +145,10 @@ class Category
             // Assigning the values.
             $this->id = $id;
 
-            // Check if there are associated posts
-            $postsQuery = 'SELECT id FROM posts WHERE category_id = :id';
-            $postsStatement = $this->connection->prepare($postsQuery);
-            $postsStatement->bindValue('id', $id);
-            $postsStatement->execute();
-
-            if ($postsStatement->rowCount() > 0) {
+            $postsModel = new Post($this->connection);
+            if (!$postsModel->deletePostsByCategoryId($id)) {
                 return false;
             }
-
             // Create Query.
             $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
 
