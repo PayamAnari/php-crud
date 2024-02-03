@@ -53,4 +53,41 @@ class Category
 
     }
 
+    //Create Category.
+
+    public function createCategory()
+    {
+
+        //Create Query.
+
+        $query = 'INSERT INTO ' . $this->table . '
+        SET
+        name = :name';
+
+        //Prepare Statement.
+
+        $category = $this->connection->prepare($query);
+
+        //Clean Data.
+
+        $this->name = htmlspecialchars(strip_tags($this->name));
+
+        //Bind Data.
+
+        $category->bindParam(':name', $this->name);
+
+        //Execute Query.
+
+        if ($category->execute()) {
+            return true;
+        }
+
+        //Print Error if something goes wrong.
+
+        printf("Error: %s.\n", $category->error);
+
+        return false;
+
+    }
+
 }
