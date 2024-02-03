@@ -92,4 +92,47 @@ class Category
         }
     }
 
+    //Update Category.
+
+    public function updateCategory($params)
+    {
+
+        try
+        {
+
+            // Assigning the values.
+
+            $this->id = $params['id'];
+            $this->name = $params['name'];
+
+            //Create Query.
+
+            $query = 'UPDATE ' . $this->table . '
+               SET
+               name = :name
+               WHERE
+               id = :id';
+
+            //Prepare Statement.
+
+            $category = $this->connection->prepare($query);
+
+            //Bind Data.
+
+            $category->bindValue('id', $this->id);
+            $category->bindValue('name', $this->name);
+
+            //Execute Query.
+
+            if ($category->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
