@@ -117,6 +117,36 @@ class Post
         return $post;
     }
 
+    /**
+     * @OA\Post(path="/api/post/insert.php",
+     * summary="Insert a new post.", tags={"Posts"},
+     * @OA\RequestBody(
+     *    @OA\MediaType(
+     *        mediaType="multipart/form-data",
+     *        @OA\Schema(
+     *            @OA\Property(
+     *                property="title",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="author",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="description",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="category_id",
+     *                type="integer",
+     *            ),
+     *        ),
+     *    ),
+     * ),
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function create_new_post($params)
     {
 
@@ -157,8 +187,41 @@ class Post
 
     }
 
-    //Method for updating post.
-
+    /**
+     * @OA\Put(
+     * path="/api/post/update.php",
+     * summary="Update a new post.", tags={"Posts"},
+     * @OA\RequestBody(
+     *    @OA\MediaType(
+     *        mediaType="json",
+     *        @OA\Schema(
+     *            @OA\Property(
+     *                property="id",
+     *                type="integer",
+     *            ),
+     *            @OA\Property(
+     *                property="title",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="author",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="description",
+     *                type="string",
+     *            ),
+     *            @OA\Property(
+     *                property="category_id",
+     *                type="integer",
+     *            ),
+     *        ),
+     *    ),
+     * ),
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function update_post($params)
     {
 
@@ -203,8 +266,26 @@ class Post
 
     }
 
-    //Method for deleting post.
-
+    /**
+     * @OA\Delete(
+     * path="/api/post/destroy.php",
+     * summary="Method to delete post from database.",
+     * tags={"Posts"},
+     * @OA\RequestBody(
+     *    @OA\MediaType(
+     *      mediaType="json",
+     *      @OA\Schema(
+     *         @OA\Property(
+     *           property="id",
+     *           type="integer",
+     *         ),
+     *       ),
+     *    ),
+     * ),
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * )
+     */
     public function delete_post($id)
     {
 
