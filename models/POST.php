@@ -30,8 +30,6 @@ class Post
         $this->connection = $db;
     }
 
-    //Get Posts.
-
     /**
      * @OA\Get(
      * path="/api/post/posts.php",
@@ -72,21 +70,18 @@ class Post
 
     }
 
-    // Method for reading single post
-
     /**
-     * @OA\Get(
-     * path="/api/post/singlePost.php",
-     * summary="Get single post",
+     * @OA\Get(path="/api/post/singlePost.php",
      * tags={"Posts"},
+     * summary="Get single post by id",
      * @OA\Parameter(
-     * name="id",
-     * in="query",
-     * required=true,
-     * description="ID of the post",
-     * @OA\Schema(
-     * type="string"
-     * ),
+     *    name="id",
+     *    in="query",
+     *    required=false,
+     *    description="The id passed to get in query string goes here",
+     *    @OA\Schema(
+     *       type="string"
+     *    ),
      * ),
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
@@ -122,40 +117,6 @@ class Post
         return $post;
     }
 
-    //Method for creating post.
-    /**
-     * @OA\Post(
-     * path="/api/post/insert.php",
-     * summary="Create new post",
-     * tags={"Posts"},
-     * @OA\RequestBody(
-     * @OA\MediaType(
-     * mediaType="multipart/form-data",
-     * @OA\Schema(
-     * @OA\Property(
-     * property="title",
-     * type="string"
-     * ),
-     * @OA\Property(
-     * property="author",
-     * type="string"
-     * ),
-     * @OA\Property(
-     * property="description",
-     * type="string"
-     * ),
-     * @OA\Property(
-     * property="category_id",
-     * type="integer"
-     * ),
-     * ),
-     * ),
-     * ),
-     * ),
-     * @OA\Response(response="200", description="Success"),
-     * @OA\Response(response="404", description="Not found"),
-     * )
-     */
     public function create_new_post($params)
     {
 
