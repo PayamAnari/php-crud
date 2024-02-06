@@ -1,0 +1,168 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PDO PHP Rest Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/post/posts.php": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all list of posts",
+                "operationId": "41ee0d66afc649f6f534dd16ea5bd994",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/post/singlePost.php": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get single post by id",
+                "operationId": "1f95caee0469378f0f7c97d53f6ccbd6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "The id passed to get in query string goes here",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/post/insert.php": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Insert a new post.",
+                "operationId": "b17efdd42454db9693f5cf76e05d028d",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "author": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/post/update.php": {
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update a new post.",
+                "operationId": "9a5185cb52a1385d066c9115efd882c4",
+                "requestBody": {
+                    "content": {
+                        "json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "author": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/post/destroy.php": {
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Method to delete post from database.",
+                "operationId": "689b4a1db8f665f1ae753527567d5a8a",
+                "requestBody": {
+                    "content": {
+                        "json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    }
+}
