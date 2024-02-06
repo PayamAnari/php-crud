@@ -119,7 +119,7 @@ class Post
 
     /**
      * @OA\Post(path="/api/post/insert.php",
-     * summary="Insert a new post.", tags={"Posts"},
+     * summary="Create a new post.", tags={"Posts"},
      * @OA\RequestBody(
      *    @OA\MediaType(
      *        mediaType="multipart/form-data",
@@ -269,7 +269,7 @@ class Post
     /**
      * @OA\Delete(
      * path="/api/post/destroy.php",
-     * summary="Method to delete post from database.",
+     * summary="Delete post from database.",
      * tags={"Posts"},
      * @OA\RequestBody(
      *    @OA\MediaType(
