@@ -5,7 +5,7 @@
         "version": "1.0"
     },
     "paths": {
-        "https://payamanari.github.io/api/post/posts.php": {
+        "/api/post/posts.php": {
             "get": {
                 "tags": [
                     "Posts"
