@@ -32,7 +32,7 @@ class Post
 
     /**
      * @OA\Get(
-     * path="https://payamanari.github.io/php-crud//api/post/posts.php",
+     * path="https://payamanari.github.io/php-crud/api/post/posts.php",
      * summary="Get all list of posts",
      * tags={"Posts"},
      * @OA\Response(response="200", description="Success"),
