@@ -2,6 +2,11 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+
 /**
  * @OA\Info(title="PDO PHP Rest Api", version="1.0")
  *   @OA\SecurityScheme(
@@ -41,16 +46,21 @@ class Post
 
     /**
      * @OA\Get(
-     * path="/api/post/posts.php",
-     * summary="Get all list of posts",
-     * tags={"Posts"},
+     * path="/api/post/auth.php",
+     * summary="Authenticates user.",
+     * tags={"Security"},
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
-     * security={ {"bearerToken": {}}}
      * )
      */
     public function auth()
     {
+        try
+        {
+
+        } catch (PDOExeption $e) {
+            echo $e->getMessage();
+        }
 
     }
 
