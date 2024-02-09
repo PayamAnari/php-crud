@@ -4,6 +4,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 /**
  * @OA\Info(title="PDO PHP Rest Api", version="1.0")
+ *   @OA\SecurityScheme(
+ *      type="http",
+ *      description="Authentication with JWT",
+ *      name="Authorization",
+ *      in="header,
+ *      scheme="bearer",
+ *      bearerFormat="JWT",
+ *      securityScheme="bearerToken"
  */
 
 class Post
