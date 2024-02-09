@@ -31,6 +31,7 @@ class Post
     public $author;
     public $description;
     public $created_at;
+    protected $key = '98765246776546';
 
     //Database Connection.
 
@@ -64,6 +65,15 @@ class Post
                 'aud' => 'http://localhost',
                 'iat' => $issueDate,
                 'nbf' => $expirationDate,
+                'userName' => 'John Doe',
+            ];
+
+            $jwtGeneratedToken = JWT::encode($payload, $this->key, 'HS256');
+
+            return [
+                'message' => 'User Authenticated',
+                'token' => $jwtGeneratedToken,
+                'expire' => $expirationDate,
             ];
 
         } catch (PDOExeption $e) {
