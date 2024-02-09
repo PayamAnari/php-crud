@@ -24,6 +24,12 @@ $db = $database->connect();
 $post = new Post($db);
 $data = $post->readPosts();
 
+if (is_bool($data)) {
+    http_response_code(500);
+    echo json_encode(['message' => 'Internal Server Error']);
+    die();
+}
+
 //if there is posts available
 
 if ($data->rowCount()) {

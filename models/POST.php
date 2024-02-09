@@ -100,7 +100,7 @@ class Post
         {
             $headers = apache_request_headers();
 
-            if ($headers['Authorization']) {
+            if (isset($headers['Authorization'])) {
                 $token = str_ireplace('Bearer ', '', $headers['Authorization']);
                 $decoded = JWT::decode($token, new key($this->key, 'HS256'));
 
@@ -161,10 +161,30 @@ class Post
      * ),
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
      * )
      */
     public function read_single_post($id)
     {
+
+        try
+        {
+            $headers = apache_request_headers();
+
+            if (isset($headers['Authorization'])) {
+                $token = str_ireplace('Bearer', '', $headers['Authorization']);
+
+                $decoded = JWT::decode($token, new key($this->key, 'HS256'));
+
+                if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
+
+                }
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        };
+
         $this->id = $id;
 
         //Create Query.
