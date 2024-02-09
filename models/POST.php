@@ -334,6 +334,7 @@ class Post
      * ),
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
      * )
      */
     public function update_post($params)
@@ -341,37 +342,49 @@ class Post
 
         try
         {
-            // Assigning the values.
 
-            $this->id = $params['id'];
-            $this->title = $params['title'];
-            $this->author = $params['author'];
-            $this->description = $params['description'];
-            $this->category_id = $params['category_id'];
+            $headers = apache_request_headers();
 
-            // Create Query.
+            if (isset($headers['Authorization'])) {
+                $token = str_ireplace('Bearer ', '', $headers['Authorization']);
+                $decoded = JWT::decode($token, new key($this->key, 'HS256'));
 
-            $query = 'UPDATE ' . $this->table . '
-            SET
-            title = :title,
-            author = :author,
-            description = :description,
-            category_id = :category_id
-            WHERE
-            id = :id';
+                if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
 
-            $post = $this->connection->prepare($query);
+                    // Assigning the values.
 
-            $post->bindValue('id', $this->id);
-            $post->bindValue('title', $this->title);
-            $post->bindValue('author', $this->author);
-            $post->bindValue('description', $this->description);
-            $post->bindValue('category_id', $this->category_id);
+                    $this->id = $params['id'];
+                    $this->title = $params['title'];
+                    $this->author = $params['author'];
+                    $this->description = $params['description'];
+                    $this->category_id = $params['category_id'];
 
-            if ($post->execute()) {
-                return true;
-            } else {
-                return false;
+                    // Create Query.
+
+                    $query = 'UPDATE ' . $this->table . '
+                         SET
+                         title = :title,
+                         author = :author,
+                         description = :description,
+                         category_id = :category_id
+                         WHERE
+                         id = :id';
+
+                    $post = $this->connection->prepare($query);
+
+                    $post->bindValue('id', $this->id);
+                    $post->bindValue('title', $this->title);
+                    $post->bindValue('author', $this->author);
+                    $post->bindValue('description', $this->description);
+                    $post->bindValue('category_id', $this->category_id);
+
+                    if ($post->execute()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    return false;
+                }
             }
 
         } catch (PDOException $e) {
