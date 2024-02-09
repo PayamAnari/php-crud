@@ -348,6 +348,12 @@ class Post
         try
         {
 
+            if (empty($params['id'])) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Please provide the "id" parameter']);
+                die();
+            }
+
             $headers = apache_request_headers();
 
             if (isset($headers['Authorization'])) {
@@ -429,6 +435,13 @@ class Post
 
         try
         {
+
+            if ($id == null) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Please provide the "id" parameter']);
+                die();
+            }
+
             $headers = apache_request_headers();
 
             if (isset($headers['Authorization'])) {
