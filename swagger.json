@@ -114,7 +114,12 @@
                     "404": {
                         "description": "Not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerToken": []
+                    }
+                ]
             }
         },
         "/api/post/update.php": {

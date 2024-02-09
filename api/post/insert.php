@@ -33,8 +33,12 @@ if (count($_POST)) {
         'category_id' => $_POST['category_id'],
     ];
 
-    if ($post->create_new_post($params)) {
+    $newPost = $post->create_new_post($params);
+
+    if ($newPost) {
         echo json_encode(array('message' => 'Post created'));
+    } else {
+        echo json_encode(array('message' => 'Post creation failed'));
     }
 } else if (isset($data)) {
     $params = [
