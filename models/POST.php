@@ -207,9 +207,11 @@ class Post
 
                 }
                 return false;
+            } else {
+                http_response_code(401);
+                echo json_encode(['message' => 'Unauthorized Access']);
+                die();
             }
-
-            return false;
 
         } catch (PDOException $e) {
             echo $e->getMessage();

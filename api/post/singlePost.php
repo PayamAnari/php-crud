@@ -31,6 +31,9 @@ if (isset($_GET['id'])) {
 
     if (!is_bool($data)) {
         $posts = [];
+        http_response_code(401);
+        echo json_encode(['message' => 'Id not found']);
+        die();
 
         while ($row = $data->fetch(PDO::FETCH_OBJ)) {
             $posts[$row->id] = [
