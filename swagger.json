@@ -5,6 +5,23 @@
         "version": "1.0"
     },
     "paths": {
+        "/api/post/auth.php": {
+            "get": {
+                "tags": [
+                    "Security"
+                ],
+                "summary": "Authenticates user.",
+                "operationId": "93f2497203734c2c5e06a86b059af0df",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
         "/api/post/posts.php": {
             "get": {
                 "tags": [

@@ -71,7 +71,7 @@ class Post
             $jwtGeneratedToken = JWT::encode($payload, $this->key, 'HS256');
 
             return [
-                'message' => 'User Authenticated',
+
                 'token' => $jwtGeneratedToken,
                 'expire' => $expirationDate,
             ];
