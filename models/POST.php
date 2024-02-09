@@ -6,6 +6,7 @@ ini_set('display_errors', 1);
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\key;
 
 /**
  * @OA\Info(title="PDO PHP Rest Api", version="1.0")
@@ -76,7 +77,7 @@ class Post
                 'expire' => $expirationDate,
             ];
 
-        } catch (PDOExeption $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
@@ -94,6 +95,16 @@ class Post
      */
     public function readPosts()
     {
+
+        try
+        {
+            $headers = apache_request_headers();
+            var_dump($headers);
+            exit;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        };
 
         //Create Query.
 

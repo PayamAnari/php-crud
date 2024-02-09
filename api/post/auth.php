@@ -24,5 +24,4 @@ if (!$token->auth()) {
 } else {
     http_response_code(200);
     echo json_encode($token->auth());
-    echo json_encode(['message' => 'Token generated successfully']);
 }
