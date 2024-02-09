@@ -57,6 +57,14 @@ class Post
     {
         try
         {
+            $issueDate = time();
+            $expirationDate = time() * 3600; // 1hour
+            $payload = [
+                'iss' => 'http://localhost/8000',
+                'aud' => 'http://localhost',
+                'iat' => $issueDate,
+                'nbf' => $expirationDate,
+            ];
 
         } catch (PDOExeption $e) {
             echo $e->getMessage();
