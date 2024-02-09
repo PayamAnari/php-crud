@@ -106,42 +106,43 @@ class Post
 
                 if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
 
+                    //Create Query.
+
+                    $query = 'SELECT
+                category.name as category,
+                posts.id,
+                posts.title,
+                posts.author,
+                posts.description,
+                posts.category_id,
+                posts.created_at
+                FROM ' . $this->table . ' posts LEFT JOIN
+                category ON posts.category_id = category.id
+                ORDER BY
+                posts.created_at DESC
+                ';
+
+                    //Prepare Statement.
+
+                    $post = $this->connection->prepare($query);
+
+                    //Execute Query.
+
+                    $post->execute();
+
+                    return $post;
                 } else {
                     return false;
                 }
-                var_dump($decoded->userName);
-                exit;
+
+            } else {
+
+                return false;
             }
 
         } catch (PDOException $e) {
             echo $e->getMessage();
         };
-
-        //Create Query.
-
-        $query = 'SELECT
-      category.name as category,
-      posts.id,
-      posts.title,
-      posts.author,
-      posts.description,
-      posts.category_id,
-      posts.created_at
-      FROM ' . $this->table . ' posts LEFT JOIN
-      category ON posts.category_id = category.id
-      ORDER BY
-      posts.created_at DESC
-      ';
-
-        //Prepare Statement.
-
-        $post = $this->connection->prepare($query);
-
-        //Execute Query.
-
-        $post->execute();
-
-        return $post;
 
     }
 
