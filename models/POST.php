@@ -65,7 +65,7 @@ class Post
                 'iss' => 'http://localhost/8000',
                 'aud' => 'http://localhost',
                 'iat' => $issueDate,
-                'nbf' => $expirationDate,
+                'exp' => $expirationDate,
                 'userName' => 'John Doe',
             ];
 
@@ -99,8 +99,19 @@ class Post
         try
         {
             $headers = apache_request_headers();
-            var_dump($headers);
-            exit;
+
+            if ($headers['Authorization']) {
+                $token = str_ireplace('Bearer ', '', $headers['Authorization']);
+                $decoded = JWT::decode($token, new key($this->key, 'HS256'));
+
+                if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
+
+                } else {
+                    return false;
+                }
+                var_dump($decoded->userName);
+                exit;
+            }
 
         } catch (PDOException $e) {
             echo $e->getMessage();
