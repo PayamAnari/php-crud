@@ -8,10 +8,11 @@ ini_set('display_errors', 1);
  *      type="http",
  *      description="Authentication with JWT",
  *      name="Authorization",
- *      in="header,
+ *      in="header",
  *      scheme="bearer",
  *      bearerFormat="JWT",
- *      securityScheme="bearerToken"
+ *      securityScheme="bearerToken",
+ *    )
  */
 
 class Post
@@ -45,6 +46,7 @@ class Post
      * tags={"Posts"},
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
      * )
      */
     public function readPosts()
