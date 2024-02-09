@@ -412,6 +412,7 @@ class Post
      * ),
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
      * )
      */
     public function delete_post($id)
@@ -419,22 +420,34 @@ class Post
 
         try
         {
-            // Assigning the values.
+            $headers = apache_request_headers();
 
-            $this->id = $id;
+            if (isset($headers['Authorization'])) {
+                $token = str_ireplace('Bearer ', '', $headers['Authorization']);
+                $decoded = JWT::decode($token, new key($this->key, 'HS256'));
 
-            // Create Query.
+                if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
 
-            $query = 'DELETE FROM ' . $this->table .
-                ' WHERE id = :id';
+                    // Assigning the values.
 
-            $post = $this->connection->prepare($query);
+                    $this->id = $id;
 
-            $post->bindValue('id', $this->id);
+                    // Create Query.
 
-            if ($post->execute()) {
-                return true;
-            } else {
+                    $query = 'DELETE FROM ' . $this->table .
+                        ' WHERE id = :id';
+
+                    $post = $this->connection->prepare($query);
+
+                    $post->bindValue('id', $this->id);
+
+                    if ($post->execute()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    return false;
+                }
                 return false;
             }
 
