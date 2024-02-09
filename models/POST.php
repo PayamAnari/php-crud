@@ -49,6 +49,21 @@ class Post
      * security={ {"bearerToken": {}}}
      * )
      */
+    public function auth()
+    {
+
+    }
+
+    /**
+     * @OA\Get(
+     * path="/api/post/posts.php",
+     * summary="Get all list of posts",
+     * tags={"Posts"},
+     * @OA\Response(response="200", description="Success"),
+     * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
+     * )
+     */
     public function readPosts()
     {
 
