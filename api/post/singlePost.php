@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
 
     $data = $post->read_single_post($_GET['id']);
 
-    if ($data->rowCount()) {
+    if (!is_bool($data)) {
         $posts = [];
 
         while ($row = $data->fetch(PDO::FETCH_OBJ)) {
@@ -44,7 +44,8 @@ if (isset($_GET['id'])) {
         }
 
         echo json_encode($posts);
+    } else {
+        echo json_encode(['message' => 'No post found']);
     }
-} else {
-    echo json_encode(['message' => 'No post found']);
+
 }

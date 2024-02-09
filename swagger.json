@@ -69,7 +69,12 @@
                     "404": {
                         "description": "Not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerToken": []
+                    }
+                ]
             }
         },
         "/api/post/insert.php": {

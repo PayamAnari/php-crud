@@ -172,45 +172,49 @@ class Post
             $headers = apache_request_headers();
 
             if (isset($headers['Authorization'])) {
-                $token = str_ireplace('Bearer', '', $headers['Authorization']);
+                $token = str_ireplace('Bearer ', '', $headers['Authorization']);
 
                 $decoded = JWT::decode($token, new key($this->key, 'HS256'));
 
                 if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
 
+                    $this->id = $id;
+
+                    //Create Query.
+
+                    $query = 'SELECT
+                   category.name as category,
+                   posts.id,
+                   posts.title,
+                   posts.author,
+                   posts.description,
+                   posts.category_id,
+                   posts.created_at
+                   FROM ' . $this->table . ' posts LEFT JOIN
+                   category ON posts.category_id = category.id
+                   WHERE posts.id =?
+                   LIMIT 0,1
+                   ';
+
+                    $post = $this->connection->prepare($query);
+
+                    //$post->bindValue('id', $this->id, PDO::PARAM_INT);
+
+                    $post->bindValue(1, $this->id, PDO::PARAM_INT);
+
+                    $post->execute();
+                    return $post;
+
                 }
+                return false;
             }
+
+            return false;
 
         } catch (PDOException $e) {
             echo $e->getMessage();
         };
 
-        $this->id = $id;
-
-        //Create Query.
-
-        $query = 'SELECT
-         category.name as category,
-         posts.id,
-         posts.title,
-         posts.author,
-         posts.description,
-         posts.category_id,
-         posts.created_at
-         FROM ' . $this->table . ' posts LEFT JOIN
-         category ON posts.category_id = category.id
-         WHERE posts.id =?
-         LIMIT 0,1
-         ';
-
-        $post = $this->connection->prepare($query);
-
-        //$post->bindValue('id', $this->id, PDO::PARAM_INT);
-
-        $post->bindValue(1, $this->id, PDO::PARAM_INT);
-
-        $post->execute();
-        return $post;
     }
 
     /**
@@ -241,6 +245,7 @@ class Post
      * ),
      * @OA\Response(response="200", description="Success"),
      * @OA\Response(response="404", description="Not found"),
+     * security={ {"bearerToken": {}}}
      * )
      */
     public function create_new_post($params)
@@ -248,32 +253,45 @@ class Post
 
         try
         {
-            // Assigning the values.
 
-            $this->title = $params['title'];
-            $this->author = $params['author'];
-            $this->description = $params['description'];
-            $this->category_id = $params['category_id'];
+            $headers = apache_request_headers();
 
-            // Create Query.
+            if (isset($headers['Authorization'])) {
+                $token = str_ireplace('Bearer ', '', $headers['Authorization']);
+                $decoded = JWT::decode($token, new key($this->key, 'HS256'));
 
-            $query = 'INSERT INTO ' . $this->table . '
-            SET
-            title = :title,
-            author = :author,
-            description = :description,
-            category_id = :category_id';
+                if (isset($decoded->userName) && $decoded->userName == 'John Doe') {
 
-            $post = $this->connection->prepare($query);
+                    // Assigning the values.
 
-            $post->bindValue('title', $this->title);
-            $post->bindValue('author', $this->author);
-            $post->bindValue('description', $this->description);
-            $post->bindValue('category_id', $this->category_id);
+                    $this->title = $params['title'];
+                    $this->author = $params['author'];
+                    $this->description = $params['description'];
+                    $this->category_id = $params['category_id'];
 
-            if ($post->execute()) {
-                return true;
-            } else {
+                    // Create Query.
+
+                    $query = 'INSERT INTO ' . $this->table . '
+                          SET
+                          title = :title,
+                          author = :author,
+                          description = :description,
+                          category_id = :category_id';
+
+                    $post = $this->connection->prepare($query);
+
+                    $post->bindValue('title', $this->title);
+                    $post->bindValue('author', $this->author);
+                    $post->bindValue('description', $this->description);
+                    $post->bindValue('category_id', $this->category_id);
+
+                    if ($post->execute()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    return false;
+                }
                 return false;
             }
 
