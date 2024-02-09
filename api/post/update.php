@@ -34,7 +34,9 @@ if (isset($data)) {
         'description' => $data->description,
     ];
 
-    if ($post->update_post($params)) {
+    $postUpdated = $post->update_post($params);
+
+    if ($postUpdated) {
         echo json_encode(['message' => 'Post Updated']);
     } else {
         echo json_encode(['message' => 'Post Not Updated']);

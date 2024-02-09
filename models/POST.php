@@ -385,6 +385,7 @@ class Post
                     }
                     return false;
                 }
+                return false;
             }
 
         } catch (PDOException $e) {
