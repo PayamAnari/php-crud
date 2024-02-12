@@ -16,16 +16,28 @@
 ---
 <p align="center">
   <img 
-    width="1200"
+    width="1000"
     alt="home"
-    src="https://live.staticflickr.com/65535/53513454408_f335f82d77_z.jpg"/>
+    src="https://live.staticflickr.com/65535/53518432372_567e583301_z.jpg"/>
 </p>
 
 ---
-## PHP CRUD REST API with Swagger Documentation
+## PHP CRUD REST API with Swagger Documentation and JWT Authentication
 ### Description
 
-- This PHP CRUD (Create, Read, Update, Delete) REST API is built using PHP PDO for database operations and Swagger for API documentation. It provides endpoints to perform CRUD operations on posts and categories.
+- This PHP CRUD (Create, Read, Update, Delete) REST API is built using PHP PDO for database operations, Swagger for API documentation, and JWT (JSON Web Tokens) for authentication. It provides endpoints to perform CRUD operations on posts and categories, with secure authentication using JWT.
+
+
+ <p align="center">
+  <img 
+    width="450"
+    alt="home"
+    src="https://live.staticflickr.com/65535/53519640099_062e5ffb21_z.jpg"/>
+   <img 
+    width="450"
+    alt="home"
+    src="https://live.staticflickr.com/65535/53519641889_6be4981cd2_z.jpg"/>
+</p>
 
 ---
 
@@ -34,16 +46,17 @@
 - **Read:** Retrieve a list of posts or get a single post by ID.
 - **Update:** Modify existing posts with updated information.
 - **Delete:** Remove posts from the database.
+- **Authentication:** Secure authentication using JWT (JSON Web Tokens) for accessing protected endpoints.
 - **Swagger Documentation:** Well-documented API endpoints using Swagger UI for easy reference.
 
 ---
 
 ## Endpoints
-- **GET /api/post/posts.php:** Get a list of all posts.
-- **GET /api/post/singlePost.php?id={post_id}:** Get a single post by its ID.
-- **POST /api/post/insert.php:** Create a new post.
-- **PUT /api/post/update.php:** Update an existing post.
-- **DELETE /api/post/destroy.php:** Delete a post by its ID.
+- **GET /api/post/posts.php:** Get a list of all posts.*(Requires authentication)*
+- **GET /api/post/singlePost.php?id={post_id}:** Get a single post by its ID.*(Requires authentication)*
+- **POST /api/post/insert.php:** Create a new post.*(Requires authentication)*
+- **PUT /api/post/update.php:** Update an existing post.*(Requires authentication)*
+- **DELETE /api/post/destroy.php:** Delete a post by its ID.*(Requires authentication)*
 
 ---
 
@@ -53,10 +66,11 @@
 - **Database Configuration:** Update the database connection settings in the Database.php file.
 - **Start the Server:** Start your local server (e.g., Apache, Nginx).
 - **Access Swagger Documentation:** Navigate to /swagger.json to access the Swagger API documentation.
+- **Authentication:** To access protected endpoints, obtain a JWT token by calling the /api/post/auth.php endpoint with valid credentials. Include the obtained token in the Authorization header of your requests to authenticated endpoints.
 
 ---
 ## Example Requests
-### Create a New Post
+### Create a New Post (Authenticated Request)
 
 ```
 POST /api/post/insert.php
@@ -69,7 +83,7 @@ POST /api/post/insert.php
 }
 ```
 
-### Update a Post
+### Update a Post (Authenticated Request)
 
 ```
 PUT /api/post/update.php
@@ -83,7 +97,7 @@ PUT /api/post/update.php
 }
 ```
 
-### Delete a Post
+### Delete a Post (Authenticated Request)
 
 ```
 POST /api/post/destroy.php
@@ -101,6 +115,8 @@ POST /api/post/destroy.php
 - **Composer** (for installing dependencies)
 - **Swagger**
 - **PhpMyAdmin**
+- **Firebase JWT Library** (for authentication)
+
 
   <p align="left">
   <img src="https://img.shields.io/badge/Php-00008B?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
@@ -108,6 +124,7 @@ POST /api/post/destroy.php
   <img src="https://img.shields.io/badge/Composer-0000FF?style=for-the-badge&logo=Composer&logoColor=white"/>
   <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"/>
   <img src="https://img.shields.io/badge/Phpmyadmin-ffa500?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JWT-FF0000?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
  
 </p>
 
