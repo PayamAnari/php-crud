@@ -24,6 +24,15 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (count($_POST)) {
 
+    $required_fields = ['title', 'author', 'description', 'category_id'];
+
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            echo json_encode(array('message' => 'Required field ' . $field . ' is missing'));
+            exit;
+        }
+    }
+
     // Create post.
 
     $params = [
@@ -41,6 +50,15 @@ if (count($_POST)) {
         echo json_encode(array('message' => 'Post creation failed'));
     }
 } else if (isset($data)) {
+
+    $required_fields = ['title', 'author', 'description', 'category_id'];
+
+    foreach ($required_fields as $field) {
+        if (empty($data->$field)) {
+            echo json_encode(array('message' => 'Required field ' . $field . ' is missing'));
+            exit;
+        }
+    }
     $params = [
         'title' => $data->title,
         'author' => $data->author,
@@ -50,5 +68,7 @@ if (count($_POST)) {
 
     if ($post->create_new_post($params)) {
         echo json_encode(array('message' => 'Post created'));
+    } else {
+        echo json_encode(array('message' => 'Post creation failed'));
     }
 }
