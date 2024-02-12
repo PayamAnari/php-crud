@@ -24,6 +24,15 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (isset($data)) {
 
+    $required_fields = ['title', 'author', 'description', 'category_id'];
+
+    foreach ($required_fields as $field) {
+        if (empty($data->$field)) {
+            echo json_encode(array('message' => 'Required field ' . $field . ' is missing'));
+            exit;
+        }
+    }
+
     //Update Post.
 
     $params = [
