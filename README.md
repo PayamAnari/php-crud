@@ -119,12 +119,12 @@ POST /api/post/destroy.php
 
 
   <p align="left">
-  <img src="https://img.shields.io/badge/Php-00008B?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
-  <img src="https://img.shields.io/badge/mysql-acace6?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Php-00008B?style=for-the-badge&logo=php&logoColor=white"/>
+  <img src="https://img.shields.io/badge/mysql-acace6?style=for-the-badge&logo=mysql&logoColor=white"/>
   <img src="https://img.shields.io/badge/Composer-0000FF?style=for-the-badge&logo=Composer&logoColor=white"/>
   <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"/>
   <img src="https://img.shields.io/badge/Phpmyadmin-ffa500?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JWT-FF0000?style=for-the-badge&logo=phpmyadmin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JWT-FF0000?style=for-the-badge&logo=jwt&logoColor=white"/>
  
 </p>
 
