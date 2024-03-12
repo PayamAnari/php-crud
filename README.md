@@ -52,6 +52,8 @@
 ---
 
 ## Endpoints
+| METHOD | ROUTE | FUNCTIONALITY |ACCESS|REQUIRMENTS|
+| ------- | ----- | ------------- | ------------- | ------------ |
 - **GET /api/post/posts.php:** Get a list of all posts.*(Requires authentication)*
 - **GET /api/post/singlePost.php?id={post_id}:** Get a single post by its ID.*(Requires authentication)*
 - **POST /api/post/insert.php:** Create a new post.*(Requires authentication)*
