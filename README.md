@@ -54,6 +54,7 @@
 ## Endpoints
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|REQUIRMENTS|
 | ------- | ----- | ------------- | ------------- | ------------ |
+| *GET* | ```/api/post/auth.php``` | _Authentication user_| _All users_| - |
 | *GET* | ```/api/post/posts.php``` | _Get a list of all posts_| _All users_| Authentication |
 | *GET* | ```/api/post/singlePost.php?id={post_id}``` | _Get a single post by ID_| _All users_| Authentication |
 | *POST* | ```/api/post/insert.php``` | _Create a new post_| _All users_| Authentication |
