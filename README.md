@@ -57,9 +57,9 @@
 | *GET* | ```/api/post/posts.php``` | _Get a list of all posts_| _All users_| Authentication |
 | *GET* | ```/api/post/singlePost.php?id={post_id}``` | _Get a single post by ID_| _All users_| Authentication |
 | *POST* | ```/api/post/insert.php``` | _Create a new post_| _All users_| Authentication |
+| *PUT* | ```/api/post/update.php``` | _Update an existing post_| _All users_| Authentication |
 
 
-- **POST /api/post/insert.php:** Create a new post.*(Requires authentication)*
 - **PUT /api/post/update.php:** Update an existing post.*(Requires authentication)*
 - **DELETE /api/post/destroy.php:** Delete a post by its ID.*(Requires authentication)*
 
